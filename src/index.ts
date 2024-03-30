@@ -6,7 +6,6 @@ import config from './configs/index.config'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import status from "express-status-monitor"
 
 const app = express()
 app.use(cors({ origin: '*' }))
@@ -18,7 +17,6 @@ app.use(deserializeUser)
 // Middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(status())
 // Database
 
 // Routes
