@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: Track Display API
+  description: API for displaying track information
+  version: 1.0.0
+servers:
+  - url: http://localhost:5001/api/v1
+paths:
+  /track/{trackId}:
+    get:
+      summary: Retrieve track information
+      parameters:
+        - in: path
+          name: trackId
+          required: true
+          schema:
+            type: string
+          description: The ID of the track to retrieve
+      responses:
+        '200':
+          description: Successful response with track information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+components:
+  schemas:
+    Track:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for the track
+        name:
+          type: string
+          description: The name of the track
+        imageUrl:
+          type: string
+          description: URL of the track's image
+        audioUrl:
+          type: string
+          description: URL of the track's audio
+        lyrics:
+          type: string
+          description: The lyrics of the track
+        artist:
+          type: string
+          description: The artist of the track
+        userId:
+          type: string
+          description: The ID of the user who created the track
+    TrackResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            track:
+              $ref: '#/components/schemas/Track'
